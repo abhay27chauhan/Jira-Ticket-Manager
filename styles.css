@@ -6,6 +6,8 @@ body{
     margin: 0;
 }
 
+/* Header */
+
 .header-container{
     /* border: 2px solid red; */
     height: 12vh;
@@ -13,12 +15,6 @@ body{
     display: flex;
     justify-content: flex-start;
     align-items: center;
-}
-
-.main-container{
-    /* border: 2px solid green; */
-    min-height: 88vh;
-    background-color: rgb(238, 238, 238);
 }
 
 .subone{
@@ -87,6 +83,15 @@ body{
     font-size:x-large;
 }
 
+/* Modal Container */
+
+.main-container{
+    /* border: 2px solid green; */
+    min-height: 88vh;
+    background-color: rgb(238, 238, 238);
+    padding: 2rem;
+}
+
 .modal-container{
     height: 50vh;
     width: 50vw;
@@ -128,4 +133,39 @@ body{
 .modal-filters{
     width:60%;
     height: 12%;
+}
+
+.border{
+    border: 3px solid white;
+}
+
+/* Ticket Container */
+
+.ticket-container{
+    height: 10rem;    
+    width:15rem;
+    background-color:white;
+}
+
+.ticket-color{
+    height: 8%;
+    width: 100%;
+    /* background-color: black; */
+}
+
+.ticket_sub-container{
+    height: 92%;
+    width: 100%;
+    padding-left:1rem;
+    font-family: sans-serif;
+    overflow-y: auto;
+}
+
+.ticket-id{
+    color:lightslategray;
+}
+
+.ticket-desc{
+    text-align: center;
+    height: 70%;
 }
