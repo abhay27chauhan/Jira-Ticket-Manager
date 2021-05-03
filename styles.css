@@ -83,13 +83,20 @@ body{
     font-size:x-large;
 }
 
+.action-container__icons:hover{
+    background-color: rgb(62, 61, 61);
+}
+
 /* Modal Container */
 
 .main-container{
     /* border: 2px solid green; */
     min-height: 88vh;
     background-color: rgb(238, 238, 238);
-    padding: 2rem;
+    padding: 3rem;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
 }
 
 .modal-container{
@@ -168,4 +175,8 @@ body{
 .ticket-desc{
     text-align: center;
     height: 70%;
+}
+
+.active{
+    background-color: rgb(62, 61, 61);
 }
