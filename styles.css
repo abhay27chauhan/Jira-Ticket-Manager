@@ -153,6 +153,9 @@ body{
     height: 10rem;    
     width:15rem;
     background-color:white;
+    border-bottom-left-radius: 0.6rem;
+    border-bottom-right-radius: 0.6rem;
+    box-shadow: 0px 12px 7px 3px rgba(0, 0, 0, .2);
 }
 
 .ticket-color{

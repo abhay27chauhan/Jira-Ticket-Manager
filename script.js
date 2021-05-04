@@ -4,6 +4,9 @@ let mainContainer = document.querySelector(".main-container")
 let addBtn = document.querySelector(".add");
 let removeBtn = document.querySelector(".remove");
 
+let lockBtn = document.querySelector(".lock");
+let unlockBtn = document.querySelector(".unlock");
+
 let modalContainer = document.querySelector(".modal-container");
 let modalFilterOptions = document.querySelectorAll(".modal-filters")
 let descBox = document.querySelector(".desc-box");
@@ -12,6 +15,7 @@ let flag = false;
 let colors = ["lightpink", "lightblue", "lightgreen", "black"]
 let cColor = colors[colors.length-1];
 let deleteState = false;
+let lock = false;
 
 for(let i=0; i<filterOptions.length; i++){
     filterOptions[i].addEventListener("click", function(){
@@ -69,8 +73,11 @@ descBox.addEventListener("keypress", function(e){
         mainContainer.appendChild(ticketContainer);
 
         let colorStripeEle = ticketContainer.querySelector(".ticket-color")
+        let contentEle = ticketContainer.querySelector(".ticket_sub-container")
+        
         handleStripeColor(colorStripeEle);
-        handleDelete(ticketContainer)
+        handleDelete(ticketContainer);
+        handleContentEditable(contentEle);
 
         modalFilterOptions.forEach(option => {
             option.classList.remove("border");
@@ -96,6 +103,22 @@ removeBtn.addEventListener("click", function(){
     
 })
 
+lockBtn.addEventListener("click", function(){
+    if(lock == false){
+        lock = true;
+        lockBtn.classList.add("active");
+        unlockBtn.classList.remove("active");
+    }
+})
+
+unlockBtn.addEventListener("click", function(){
+    if(lock == true){
+        lock = false;
+        lockBtn.classList.remove("active");
+        unlockBtn.classList.add("active");
+    }
+})
+
 function handleStripeColor(colorStripeEle){
     colorStripeEle.addEventListener("click", function(){
         let classes = colorStripeEle.classList;
@@ -104,8 +127,10 @@ function handleStripeColor(colorStripeEle){
         let index = colors.indexOf(curColor);
         let newidx = (index + 1)%colors.length;
         let newColor = colors[newidx];
-        colorStripeEle.classList.remove(curColor);
-        colorStripeEle.classList.add(newColor);
+        if(lock == false){
+            colorStripeEle.classList.remove(curColor);
+            colorStripeEle.classList.add(newColor);
+        }
     })
 }
 
@@ -113,6 +138,16 @@ function handleDelete(ticketContainer){
     ticketContainer.addEventListener("click", function(){
         if(deleteState == true){
             ticketContainer.remove();
+        }
+    })
+}
+
+function handleContentEditable(contentEle){
+    contentEle.addEventListener("click", function(){
+        if(lock == false){
+            contentEle.setAttribute("contenteditable", "true");
+        }else{
+            contentEle.setAttribute("contenteditable", "false");
         }
     })
 }
