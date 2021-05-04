@@ -16,6 +16,15 @@ let colors = ["lightpink", "lightblue", "lightgreen", "black"]
 let cColor = colors[colors.length-1];
 let deleteState = false;
 let lock = false;
+let allTasks = [];
+
+if(localStorage.getItem("allTasks")){
+    allTasks = JSON.parse(localStorage.getItem("allTasks"));
+    allTasks.forEach(obj => {
+        let {id, color, task} = obj
+        createTicket(task, color, id);
+    })
+}
 
 for(let i=0; i<filterOptions.length; i++){
     filterOptions[i].addEventListener("click", function(){
@@ -60,24 +69,9 @@ for(let i=0; i<modalFilterOptions.length; i++){
 
 descBox.addEventListener("keypress", function(e){
     if(e.key == "Enter" && descBox.value.trim() !== ""){
-        let id = uid();
-        let ticketContainer = document.createElement("div");
-        ticketContainer.setAttribute("class", "ticket-container");
-
-        ticketContainer.innerHTML = `<div class="ticket-color ${cColor}"></div>
-            <div class="ticket_sub-container">
-                <h3 class="ticket-id">#${id}</h3>
-                <p class="ticket-desc">${descBox.value}</p>
-            </div>`
+        let task = descBox.value;
         
-        mainContainer.appendChild(ticketContainer);
-
-        let colorStripeEle = ticketContainer.querySelector(".ticket-color")
-        let contentEle = ticketContainer.querySelector(".ticket_sub-container")
-        
-        handleStripeColor(colorStripeEle);
-        handleDelete(ticketContainer);
-        handleContentEditable(contentEle);
+        createTicket(task, cColor);
 
         modalFilterOptions.forEach(option => {
             option.classList.remove("border");
@@ -130,6 +124,19 @@ function handleStripeColor(colorStripeEle){
         if(lock == false){
             colorStripeEle.classList.remove(curColor);
             colorStripeEle.classList.add(newColor);
+
+            let ticketSubcontainerElem = colorStripeEle.parentNode.children[1];
+            // unique id element
+            let idElem = ticketSubcontainerElem.children[0];
+            let id = idElem.innerHTML.slice(1);
+
+            for(let i=0; i<allTasks.length; i++){
+                if(id == allTasks[i].id){
+                    allTasks[i].color = newColor;
+                }
+            }
+
+            localStorage.setItem("allTasks", JSON.stringify(allTasks));
         }
     })
 }
@@ -137,6 +144,12 @@ function handleStripeColor(colorStripeEle){
 function handleDelete(ticketContainer){
     ticketContainer.addEventListener("click", function(){
         if(deleteState == true){
+            let idElem = ticketContainer.querySelector(".ticket-id")
+            let id = idElem.innerHTML.slice(1);
+            allTasks = allTasks.filter(obj => {
+                return obj.id !== id;
+            })
+            localStorage.setItem("allTasks", JSON.stringify(allTasks));
             ticketContainer.remove();
         }
     })
@@ -150,4 +163,35 @@ function handleContentEditable(contentEle){
             contentEle.setAttribute("contenteditable", "false");
         }
     })
+}
+
+function createTicket(task, color, myid){
+    let id = myid || uid();
+
+    let ticketContainer = document.createElement("div");
+    ticketContainer.setAttribute("class", "ticket-container");
+
+    ticketContainer.innerHTML = `<div class="ticket-color ${color}"></div>
+        <div class="ticket_sub-container">
+            <h3 class="ticket-id">#${id}</h3>
+            <p class="ticket-desc">${task}</p>
+        </div>`
+    
+    if(!myid){
+        allTasks.push({
+            id,
+            color,
+            task
+        })
+        localStorage.setItem("allTasks", JSON.stringify(allTasks));
+    }
+
+    mainContainer.appendChild(ticketContainer);
+
+    let colorStripeEle = ticketContainer.querySelector(".ticket-color")
+    let contentEle = ticketContainer.querySelector(".ticket_sub-container")
+    
+    handleStripeColor(colorStripeEle);
+    handleDelete(ticketContainer);
+    handleContentEditable(contentEle);
 }

@@ -109,6 +109,8 @@ body{
     /* background-color: black; */
     /* border: 2px solid red; */
     display: none;
+    border-radius: 0.8rem;
+    box-shadow: 0px 12px 9px 4px rgba(0, 0, 0, .3);
 }
 
 .modal-task__conatiner{
@@ -124,6 +126,8 @@ body{
     font-family: sans-serif;
     color:lightslategray;
     line-height: 120%;
+    border-top-left-radius: 0.8rem;
+    border-bottom-left-radius: 0.8rem;
 }
 
 .modal-filter__conatiner{
@@ -136,11 +140,14 @@ body{
     align-items: center;
     padding-top: 1rem;
     padding-bottom: 1rem;
+    border-top-right-radius: 0.8rem;
+    border-bottom-right-radius: 0.8rem;
 }
 
 .modal-filters{
     width:60%;
     height: 12%;
+    border-radius: 0.5rem;
 }
 
 .border{
