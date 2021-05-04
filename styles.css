@@ -97,6 +97,7 @@ body{
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
+    gap: 3vw;
 }
 
 .modal-container{
@@ -179,4 +180,36 @@ body{
 
 .active{
     background-color: rgb(62, 61, 61);
+}
+
+@media only screen and (max-width: 770px) {
+  .modal-container{
+      width: 55vw;
+      left: calc((100vw - 55vw)/2);
+  }
+
+  .modal-task__conatiner{
+      width: 75%;
+  }
+
+  .modal-filter__conatiner{
+      width: 25%;
+  }
+}
+
+@media only screen and (max-width: 430px) {
+  .action-container{
+      width: 20%;
+  }
+  
+  .subone{
+    width: 30%;
+  }
+
+  .modal-container{
+    height: 35vh;
+    width: 80vw;
+    top: calc((100vh - 35vh)/2 + 6vh);
+    left: calc((100vw - 80vw)/2);
+  }
 }
