@@ -6,9 +6,6 @@ let mainContainer = document.querySelector(".main-container")
 let addBtn = document.querySelector(".add");
 let removeBtn = document.querySelector(".remove");
 
-let lockBtn = document.querySelector(".lock");
-let unlockBtn = document.querySelector(".unlock");
-
 let modalContainer = document.querySelector(".modal-container");
 let modalFilterOptions = document.querySelectorAll(".modal-filters")
 let descBox = document.querySelector(".desc-box");
@@ -17,9 +14,9 @@ let flag = false;
 let colors = ["lightpink", "lightblue", "lightgreen", "black"]
 let cColor = colors[colors.length-1];
 let deleteState = false;
-let lock = false;
 let allTasks = [];
 let pFilterColor = null;
+let lock = true;
 
 if(localStorage.getItem("allTasks")){
     allTasks = JSON.parse(localStorage.getItem("allTasks"));
@@ -95,22 +92,6 @@ removeBtn.addEventListener("click", function(){
     
 })
 
-lockBtn.addEventListener("click", function(){
-    if(lock == false){
-        lock = true;
-        lockBtn.classList.add("active");
-        unlockBtn.classList.remove("active");
-    }
-})
-
-unlockBtn.addEventListener("click", function(){
-    if(lock == true){
-        lock = false;
-        lockBtn.classList.remove("active");
-        unlockBtn.classList.add("active");
-    }
-})
-
 function handleStripeColor(colorStripeEle){
     colorStripeEle.addEventListener("click", function(){
         let classes = colorStripeEle.classList;
@@ -172,7 +153,7 @@ function createTicket(task, color, myid){
     ticketContainer.innerHTML = `<div class="ticket-color ${color}"></div>
         <div class="ticket_sub-container">
             <h3 class="ticket-id">#${id}</h3>
-            <p class="ticket-desc">${task}</p>
+            <div class="ticket-desc">${task}</div>
         </div>`
     
     if(!myid){
@@ -192,7 +173,7 @@ function createTicket(task, color, myid){
             let {id, color, task} = obj;
             createTicket(task, color, id);
         })
-        
+
         allTasks.push({
             id,
             color,

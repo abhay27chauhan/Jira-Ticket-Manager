@@ -55,6 +55,10 @@ body{
     align-items: center;
 }
 
+.filter-colors__container:hover{
+    background-color: rgb(62, 61, 61);
+}
+
 .lightpink{
     background-color: pink;
 }
@@ -77,6 +81,22 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.lock-container{
+    height: 70%;
+    width: 5%;
+    background-color: rgb(89, 87, 87);
+    margin-left: 2.2rem;
+    border-radius: 0.3rem;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.lock-container:hover{
+    background-color: rgb(62, 61, 61);
 }
 
 .fas{
