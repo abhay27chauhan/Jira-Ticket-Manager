@@ -19,6 +19,7 @@ let cColor = colors[colors.length-1];
 let deleteState = false;
 let lock = false;
 let allTasks = [];
+let pFilterColor = null;
 
 if(localStorage.getItem("allTasks")){
     allTasks = JSON.parse(localStorage.getItem("allTasks"));
@@ -175,6 +176,23 @@ function createTicket(task, color, myid){
         </div>`
     
     if(!myid){
+        pFilterColor = null;
+        mainContainer.style.backgroundColor = "rgb(238, 238, 238)"
+        filterOptions.forEach(option => {
+            option.children[0].classList.remove("border");
+        })
+
+        let ticketsArr = document.querySelectorAll(".ticket-container");
+        let length = ticketsArr.length;
+        for(let i=0; i<length; i++){
+            ticketsArr[i].remove();
+        }
+
+        allTasks.forEach(obj => {
+            let {id, color, task} = obj;
+            createTicket(task, color, id);
+        })
+        
         allTasks.push({
             id,
             color,

@@ -1,7 +1,5 @@
 'use strict';
 
-let pFilterColor = null;
-
 for(let i=0; i<filterOptions.length; i++){
     filterOptions[i].addEventListener("click", function(){
         let filterColorElem = filterOptions[i].children[0];
