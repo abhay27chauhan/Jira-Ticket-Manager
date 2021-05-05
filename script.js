@@ -1,3 +1,5 @@
+'use strict';
+
 let filterOptions = document.querySelectorAll(".filter-colors__container")
 let mainContainer = document.querySelector(".main-container")
 
@@ -26,22 +28,17 @@ if(localStorage.getItem("allTasks")){
     })
 }
 
-for(let i=0; i<filterOptions.length; i++){
-    filterOptions[i].addEventListener("click", function(){
-        filterOptions.forEach(option => {
-            option.children[0].classList.remove("border");
-        })
+// for(let i=0; i<filterOptions.length; i++){
+//     filterOptions[i].addEventListener("click", function(){
 
-        let arr = filterOptions[i].children;
+//         let arr = filterOptions[i].children;
 
-        arr[0].classList.add("border");
+//         let chclassesArr = arr[0].classList;
 
-        let chclassesArr = arr[0].classList;
+//         mainContainer.style.backgroundColor = chclassesArr[0];
 
-        mainContainer.style.backgroundColor = chclassesArr[0];
-
-    })
-}
+//     })
+// }
 
 addBtn.addEventListener("click", function(){
     if(flag === false){
@@ -170,7 +167,7 @@ function createTicket(task, color, myid){
 
     let ticketContainer = document.createElement("div");
     ticketContainer.setAttribute("class", "ticket-container");
-
+    
     ticketContainer.innerHTML = `<div class="ticket-color ${color}"></div>
         <div class="ticket_sub-container">
             <h3 class="ticket-id">#${id}</h3>
