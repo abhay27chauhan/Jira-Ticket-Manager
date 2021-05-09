@@ -134,16 +134,6 @@ function handleDelete(ticketContainer){
     })
 }
 
-function handleContentEditable(contentEle){
-    contentEle.addEventListener("click", function(){
-        if(lock == false){
-            contentEle.setAttribute("contenteditable", "true");
-        }else{
-            contentEle.setAttribute("contenteditable", "false");
-        }
-    })
-}
-
 function createTicket(task, color, myid){
     let id = myid || uid();
 
@@ -185,9 +175,7 @@ function createTicket(task, color, myid){
     mainContainer.appendChild(ticketContainer);
 
     let colorStripeEle = ticketContainer.querySelector(".ticket-color")
-    let contentEle = ticketContainer.querySelector(".ticket_sub-container")
     
     handleStripeColor(colorStripeEle);
     handleDelete(ticketContainer);
-    handleContentEditable(contentEle);
 }
